@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios的基本使用</title>
+    <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.6/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <button type="button" class="btn btn-primary">发送GET请求</button>
+        <button type="button" class="btn btn-warning">发送POST请求</button>
+        <button type="button" class="btn btn-success">发送PUT请求</button>
+        <button type="button" class="btn btn-danger">发送DELETE请求</button>
+    </div>
+    <script>
+        // 获取按钮
+        const btns = document.querySelectorAll('button');
+        // 为第一个按钮绑定单击响应事件
+        btns[0].onclick = function () {
+            // 发送Ajax请求
+            // alert('123');
+            axios({
+                // 请求类型
+                method: 'GET',
+                // URL
+                // 此处的url指向的是id为2的那篇文章
+                url: 'http://localhost:3000/posts/2'
+            }).then(response => {
+                console.log(response);
+            })
+        }
+        // 添加一篇新文章
+        btns[1].onclick = function () {
+            axios({
+                method: 'POST',
+                url: 'http://localhost:3000/posts',
+                // 设置请求体
+                data:
+                {
+                    title: 'Javascript权威指南',
+                    author: '(美)弗拉纳根'
+                }
+
+            }).then(response => {
+                console.log(response);
+            })
+        }
+        // 更新数据
+        btns[2].onclick = function () {
+            axios({
+                method: 'PUT',
+                url: 'http://localhost:3000/posts/3',
+                data: {
+                    title: 'Javascript权威指南',
+                    author: '(美)弗拉纳根'
+                }
+            }).then(response => {
+                console.log(response);
+            })
+        }
+        // 删除数据
+        btns[3].onclick = function () {
+            axios({
+                method: 'DELETE',
+                // 将id为1的数据删除
+                url: 'http://127.0.0.1:3000/posts/1'
+            }).then(response => {
+                console.log(response);
+            })
+        }
+    </script>
+</body>
+
+
+</html>
